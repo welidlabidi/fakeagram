@@ -26,7 +26,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand d-flex" href="{{ url('/') }}">
-                    <div><img src="../svg/instagram.png" alt="logo" style="height: 20px; border-right: 1px solid #333;"
+                    <div><img src="./svg/instagram.png" alt="logo" style="height: 20px; border-right: 1px solid #333;"
                             class="pr-3"></div>
                     <div class="pl-3">Fakeagram</div>
                 </a>

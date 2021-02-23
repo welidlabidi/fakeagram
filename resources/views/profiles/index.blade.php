@@ -7,8 +7,9 @@
             <img src="../svg/fakeagramlogo.svg" style="height:100px;" alt="logo" />
         </div>
         <div class="col-9" class="pt-5">
-            <div>
+            <div class="d-flex justify-content-between align-items-baseline">
                 <h1> {{ $user->username }} </h1>
+                <a href="">add new post</a>
             </div>
             <div class="d-flex">
                 <div class="pr-5"><strong>134</strong> posts</div>
