@@ -2,14 +2,17 @@
 
 @section('content')
 <div class="container">
-    <div class="row">
+    <div class="row pt-5 d-flex justify-content-between align-items-center">
         <div class="col-3 pb-5">
-            <img src="../svg/fakeagramlogo.svg" style="height:100px;" alt="logo" />
+            <img src="/storage/{{$user->profile->image}}" class="rounded-circle w-100" alt="logo" />
         </div>
         <div class="col-9" class="pt-5">
             <div class="d-flex justify-content-between align-items-baseline">
                 <h1> {{ $user->username }} </h1>
+                @can('update', $user->profile)
                 <a href="/p/create">add new post</a>
+                @endcan
+
 
             </div>
 
@@ -22,7 +25,10 @@
             <div>{{$user->profile->description}} </div>
             <div class="d-flex justify-content-between align-items-baseline">
                 <a href="{{$user->profile->url}}">{{$user->profile->url}}</a>
+
+                @can('update', $user->profile)
                 <a href="/profile/{{ $user->id }}/edit">Edit profile</a>
+                @endcan
             </div>
         </div>
     </div>
