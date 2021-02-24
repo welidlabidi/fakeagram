@@ -21,7 +21,7 @@
             <div class="pt-4 font-weight-bold">{{$user->profile->title}}</div>
             <div>{{$user->profile->description}} </div>
             <div class="d-flex justify-content-between align-items-baseline">
-                <a href="">{{$user->profile->url}}</a>
+                <a href="{{$user->profile->url}}">{{$user->profile->url}}</a>
                 <a href="/profile/{{ $user->id }}/edit">Edit profile</a>
             </div>
         </div>
