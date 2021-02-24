@@ -3,17 +3,18 @@
 @section('content')
 <div class="container">
     <div class="row pt-5 d-flex justify-content-between align-items-center">
-        <div class="col-3 pb-5">
-            <img src="/storage/{{$user->profile->image}}" class="rounded-circle w-100" alt="logo" />
+        <div class="col-3">
+            <img src="{{$user->profile->profileImage()}}" class="rounded-circle w-100" alt="logo" />
         </div>
-        <div class="col-9" class="pt-5">
+        <div class="col-9">
             <div class="d-flex justify-content-between align-items-baseline">
-                <h1> {{ $user->username }} </h1>
+                <div class="d-flex align-items-center">
+                    <div class="h4"> {{ $user->username }} </div>
+                    <followbutton user-id="{{ $user->id }}"></followbutton>
+                </div>
                 @can('update', $user->profile)
                 <a href="/p/create">add new post</a>
                 @endcan
-
-
             </div>
 
             <div class="d-flex">
