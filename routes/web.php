@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('email', function () {
+Route::get('/email', function () {
     return new NewUserWelcomeMail();
 });
 
