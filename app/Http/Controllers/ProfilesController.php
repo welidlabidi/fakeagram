@@ -7,38 +7,24 @@ use Intervention\Image\Facades\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 
+
 class ProfilesController extends Controller
 {
     public function index(User $user)
     {
         $follows = (auth()->user()) ? auth()->user()->following->contains($user->id) : false;
 
-        $posts =  Cache::remember(
-            'count.posts.' . $user->id,
-            now()->addSeconds(30),
-            function () use ($user) {
-                return $user->posts->count();
-            }
-        );
+        $posts =  $user->posts->count();
 
-        $followers = Cache::remember(
-            'count.followers.' . $user->id,
-            now()->addSeconds(30),
-            function () use ($user) {
-                return $user->profile->followers->count();
-            }
-        );
+        $followers = $user->profile->followers->count();
 
-        $following = Cache::remember(
-            'count.following.' . $user->id,
-            now()->addSeconds(30),
-            function () use ($user) {
-                return $user->following->count();
-            }
-        );
+
+        $following = $user->following->count();
 
         return view('profiles.index', compact('user', 'follows', 'posts', 'followers', 'following'));
     }
+
+
 
     public function edit(User $user)
     {
@@ -51,11 +37,10 @@ class ProfilesController extends Controller
         $this->authorize('update', $user->profile);
         $data = request()->validate([
             'title' => 'required',
-            'description' => 'required',
-            'url' => 'url',
+            'description' => '',
+            'url' => '',
             'image' => '',
         ]);
-
 
         if (request('image')) {
             $imagePath = (request('image')->store('uploads', 'public'));

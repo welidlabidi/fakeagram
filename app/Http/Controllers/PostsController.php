@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 use App\Post;
+use App\Profile;
+use App\User;
+
 
 class PostsController extends Controller
 {
@@ -13,13 +16,21 @@ class PostsController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function index(User $user)
     {
         $users = auth()->user()->following()->pluck('profiles.user_id');
 
         $posts = Post::whereIn('user_id', $users)->with('user')->latest()->paginate(5);
+        $userss = Profile::all();
+        $follows = (auth()->user()) ? auth()->user()->following->contains($user->id) : false;
 
-        return view('posts.index', compact('posts'));
+        /* $followers = $user->profile->followers->count();
+
+
+        $following = $user->following->count(); */
+        /*         dd($follows);
+ */
+        return view('posts.index', compact('posts', 'userss', 'follows'));
     }
 
 

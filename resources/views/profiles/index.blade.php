@@ -33,6 +33,8 @@
             </div>
         </div>
     </div>
+    <hr>
+
     <div class="row pt-5 pb-4">
         @foreach($user->posts as $post)
         <div class="col-4">
@@ -41,8 +43,7 @@
             </a>
             <h5>{{ $post->caption  }}</h5>
         </div>
-
-
         @endforeach
     </div>
+
     @endsection
