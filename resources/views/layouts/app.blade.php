@@ -80,6 +80,7 @@
                 </div>
             </div>
         </nav>
+        <hr>
 
         <main class="py-4">
             @yield('content')

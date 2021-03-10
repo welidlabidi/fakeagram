@@ -16,7 +16,7 @@ class ProfilesController extends Controller
 
         $posts =  $user->posts->count();
 
-        $followers = $user->profile->followers->count();
+        $followers = ($user->id) ? $user->profile->followers->count() : null;
 
 
         $following = $user->following->count();

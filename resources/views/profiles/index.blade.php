@@ -10,7 +10,10 @@
             <div class="d-flex justify-content-between align-items-baseline">
                 <div class="d-flex align-items-center">
                     <div class="h4"> {{ $user->username }} </div>
-                    <followbutton user-id="{{ $user->id }}" follows={{ $follows}}></followbutton>
+                    <?php if (Auth::user()->id !== $user->id) { ?>
+                    <followbutton style="margin-left: 15px;" user-id="{{ $user->id }}" follows={{ $follows}}>
+                    </followbutton>
+                    <?php } ?>
                 </div>
                 @can('update', $user->profile)
                 <a href="/p/create">add new post</a>
@@ -37,11 +40,10 @@
 
     <div class="row pt-5 pb-4">
         @foreach($user->posts as $post)
-        <div class="col-4">
+        <div class="col-4 pb-4">
             <a href="/p/{{$post->id}}">
                 <img src="/storage/{{ $post->image }}" class="w-100" alt="" />
             </a>
-            <h5>{{ $post->caption  }}</h5>
         </div>
         @endforeach
     </div>

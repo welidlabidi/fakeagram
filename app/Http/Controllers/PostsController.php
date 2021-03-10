@@ -7,12 +7,14 @@ use Intervention\Image\Facades\Image;
 use App\Post;
 use App\Profile;
 use App\User;
-
+use App\Http\Controllers\ProfilesController;
 
 class PostsController extends Controller
 {
-    public function __construct()
+    protected $ProfilesController;
+    public function __construct(ProfilesController $ProfilesController)
     {
+        $this->ProfilesController = $ProfilesController;
         $this->middleware('auth');
     }
 
@@ -20,16 +22,15 @@ class PostsController extends Controller
     {
         $users = auth()->user()->following()->pluck('profiles.user_id');
 
-        $posts = Post::whereIn('user_id', $users)->with('user')->latest()->paginate(5);
+        $posts = Post::whereIn('user_id', $users)->with('user')->latest()->paginate();
         $userss = Profile::all();
         $follows = (auth()->user()) ? auth()->user()->following->contains($user->id) : false;
 
-        /* $followers = $user->profile->followers->count();
 
 
-        $following = $user->following->count(); */
-        /*         dd($follows);
- */
+
+
+
         return view('posts.index', compact('posts', 'userss', 'follows'));
     }
 
