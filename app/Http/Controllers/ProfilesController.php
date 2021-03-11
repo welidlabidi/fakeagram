@@ -24,6 +24,11 @@ class ProfilesController extends Controller
         return view('profiles.index', compact('user', 'follows', 'posts', 'followers', 'following'));
     }
 
+    public function delete(User $user)
+    {
+        $this->authorize('delete', $user->profile);
+    }
+
 
 
     public function edit(User $user)

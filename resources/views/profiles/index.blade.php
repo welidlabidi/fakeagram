@@ -29,16 +29,20 @@
             <div>{{$user->profile->description}} </div>
             <div class="d-flex justify-content-between align-items-baseline">
                 <a href="{{$user->profile->url}}">{{$user->profile->url}}</a>
-
-                @can('update', $user->profile)
-                <a href="/profile/{{ $user->id }}/edit">Edit profile</a>
-                @endcan
+                <div class="d-flex flex-column">
+                    @can('update', $user->profile)
+                    <a href="/profile/{{ $user->id }}/edit">Edit profile</a>
+                    @endcan
+                    @can('update', $user->profile)
+                    <a href="" style="color:red;" class="pt-2">Delete profile</a>
+                    @endcan
+                </div>
             </div>
         </div>
     </div>
     <hr>
 
-    <div class="row pt-5 pb-4">
+    <div class=" row pt-5 pb-4">
         @foreach($user->posts as $post)
         <div class="col-4 pb-4">
             <a href="/p/{{$post->id}}">

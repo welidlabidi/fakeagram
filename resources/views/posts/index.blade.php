@@ -7,7 +7,7 @@
     <div class="row pt-5 d-flex align-items-center">
         @foreach($userss as $user)
         <?php if (Auth::user()->id !== $user->id) { ?>
-        <?php if ($user->id) { ?>
+        <?php if ($user) { ?>
         <div class="card d-flex align-items-center mr-3" style="width: 14rem; padding-bottom:10px;">
             <a href="/profile/{{$user->id}}">
                 <?php if ($user->image !== null) { ?>

@@ -24,14 +24,11 @@ class PostsController extends Controller
 
         $posts = Post::whereIn('user_id', $users)->with('user')->latest()->paginate();
         $userss = Profile::all();
-        $follows = (auth()->user()) ? auth()->user()->following->contains($user->id) : false;
+        $follows = (auth()->user()) ? auth()->user()->following->contains($user) : false;
 
-
-
-
-
-
-        return view('posts.index', compact('posts', 'userss', 'follows'));
+        /*         dd($users);
+ */
+        return view('posts.index', compact('posts', 'userss', 'follows', 'users'));
     }
 
 
