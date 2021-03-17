@@ -34,7 +34,12 @@
                     <a href="/profile/{{ $user->id }}/edit">Edit profile</a>
                     @endcan
                     @can('update', $user->profile)
-                    <a href="" style="color:red;" class="pt-2">Delete profile</a>
+                    <form action="{{route('destroy',$user->id)}}" enctype="multipart/form-data" method="GET">
+                        @csrf
+                        <button type="submit" class="btn btn-danger"
+                            style="border:none; background-color:transparent;color:red; padding:0;">Delete
+                            profile</button>
+                    </form>
                     @endcan
                 </div>
             </div>

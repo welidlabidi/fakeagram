@@ -18,9 +18,9 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/email', function () {
+/* Route::get('/email', function () {
     return new NewUserWelcomeMail();
-});
+}); */
 
 Route::post('follow/{user}', 'FollowController@store');
 
@@ -29,7 +29,10 @@ Route::get('/', 'PostsController@index');
 Route::get('/p/create', 'PostsController@create');
 Route::post('/p', 'PostsController@store');
 Route::get('/p/{post}', 'PostsController@show');
+Route::post('/postDestroy/{id}', 'PostsController@postDestroy')->name('postDestroy');
+Route::delete('/postDestroy/{id}', 'PostsController@postDestroy')->name('postDestroy');
 
 Route::get('/profile/{user}', 'ProfilesController@index')->name('profile.show');
 Route::get('/profile/{user}/edit', 'ProfilesController@edit')->name('profile.edit');
+Route::get('/profile/destroy/{id}', 'ProfilesController@destroy')->name('destroy');
 Route::patch('/profile/{user}', 'ProfilesController@update')->name('profile.update');

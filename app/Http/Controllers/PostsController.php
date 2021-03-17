@@ -64,4 +64,11 @@ class PostsController extends Controller
     {
         return view('posts.show', compact('post'));
     }
+
+    public function postDestroy($id)
+    {
+        $post = Post::find($id);
+        $post->delete();
+        return redirect('/profile/' . auth()->user()->id)->with('status', 'post has been delete!');
+    }
 }

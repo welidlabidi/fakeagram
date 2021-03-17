@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Post;
 use App\User;
+use App\Profile;
 use Intervention\Image\Facades\Image;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
-
+use Illuminate\Support\Facades\Redirect;
 
 class ProfilesController extends Controller
 {
@@ -24,9 +27,14 @@ class ProfilesController extends Controller
         return view('profiles.index', compact('user', 'follows', 'posts', 'followers', 'following'));
     }
 
-    public function delete(User $user)
+    public function destroy($id)
     {
-        $this->authorize('delete', $user->profile);
+        $user = User::findOrFail($id);
+        $profile = Profile::findOrFail($id);
+        $user->delete();
+        $profile->delete();
+
+        return redirect('/register');
     }
 
 
